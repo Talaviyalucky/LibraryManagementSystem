@@ -1,0 +1,157 @@
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+        width: 100%;
+        background-color: rgba(15, 15, 15, 0.9);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    .navbar h1 {
+        font-size: 22px;
+        color: #00b4db;
+        letter-spacing: 1px;
+    }
+
+    .navbar ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        gap: 25px;
+    }
+
+    .navbar ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+        color: #00b4db;
+    }
+
+    /* Center content */
+    .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Register card */
+    .register-card {
+        background: rgba(20, 20, 20, 0.9);
+        border-radius: 16px;
+        padding: 40px 50px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        width: 400px;
+        margin-top: 80px;
+    }
+
+    .register-card h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #00b4db;
+    }
+
+    .form-control {
+        background: #9d9c9c;
+        border: 1px solid #333;
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        border-color: #00b4db;
+        outline: none;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #00b4db;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #fff;
+    }
+
+    .btn:hover {
+        background-color: #0093b8;
+    }
+
+    .link {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .link a {
+        color: #00b4db;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <h1>Library Management</h1>
+    <ul>
+        <li><a asp-action="Login">Login</a></li>
+        <li><a asp-action="Register">Register</a></li>
+    </ul>
+</nav>
+
+<!-- Centered register box -->
+<div class="container">
+    <div class="register-card">
+        <h2>Create Account</h2>
+        <form asp-action="Register" method="post">
+            <input type="text" name="username" class="form-control" placeholder="Username" required />
+            <input type="password" name="password" class="form-control" placeholder="Password" required />
+            <select name="role" class="form-control" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+            <button type="submit" class="btn">Register</button>
+        </form>
+
+        <div class="link">
+            <p>Already have an account? <a asp-action="Login">Login here</a></p>
+        </div>
+    </div>
+</div>

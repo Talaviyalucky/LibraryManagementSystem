@@ -1,0 +1,52 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center text-primary">📊 Admin Dashboard</h2>
+
+    <div class="row text-center">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Total Books</h5>
+                    <h3 class="card-text text-primary">@ViewBag.TotalBooks</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Available Books</h5>
+                    <h3 class="card-text text-success">@ViewBag.AvailableBooks</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Issued Books</h5>
+                    <h3 class="card-text text-warning">@ViewBag.IssuedBooks</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Total Users</h5>
+                    <h3 class="card-text text-info">@ViewBag.TotalUsers</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-controller="Books" asp-action="Manage" class="btn btn-outline-primary">
+            📚 Manage Books
+        </a>
+    </div>
+</div>

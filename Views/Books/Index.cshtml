@@ -1,0 +1,194 @@
+@model IEnumerable<LibraryManagement.Models.Book>
+
+@{
+    ViewData["Title"] = "All Books";
+    Layout = "_Layout";
+    var role = Context.Session.GetString("Role");
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        color: #00b4db;
+        font-weight: 700;
+    }
+
+    .card {
+        background-color: rgba(20, 20, 20, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .form-control {
+        background-color: #1c1c1c;
+        color: #fff;
+        border: 1px solid #333;
+    }
+
+    .form-control::placeholder {
+        color: #ccc;
+    }
+
+    .btn-outline-light {
+        border-color: #00b4db;
+        color: #00b4db;
+    }
+
+    .btn-outline-light:hover {
+        background-color: #00b4db;
+        color: white;
+    }
+
+    .btn-primary {
+        background-color: #00b4db;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0093b8;
+    }
+
+    .table {
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        color: #00b4db;
+        background-color: #1a1a1a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .table td {
+        background-color: #242424;
+    }
+
+    .add-btn {
+        background-color: #00b4db;
+        border: none;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 8px 18px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .add-btn:hover {
+        background-color: #0093b8;
+    }
+
+    .action-btn {
+        background-color: #00b4db;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    .action-btn:hover {
+        background-color: #0093b8;
+    }
+
+    .issue-btn {
+        background-color: #198754;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    .issue-btn:hover {
+        background-color: #157347;
+    }
+</style>
+
+<div class="container mt-5 text-white">
+    <div class="card shadow-lg p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>All Books</h2>
+
+            <div class="d-flex">
+                <form method="get" asp-action="Index" class="d-flex me-3">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Search by title, author, or category..." />
+                    <button type="submit" class="btn btn-outline-light">Search</button>
+                </form>
+
+                @if (role == "Admin")
+                {
+                    <a asp-action="Create" class="add-btn">+ Add New Book</a>
+                }
+            </div>
+        </div>
+
+        <table class="table table-dark table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Available</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.Author</td>
+                        <td>@book.Category</td>
+                        <td>
+                            @if (book.IsAvailable)
+                            {
+                                <span class="badge bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No</span>
+                            }
+                        </td>
+                        <td>
+                            @if (role == "Admin")
+                            {
+                                <a asp-action="Edit" asp-route-id="@book.Id" class="action-btn me-2">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@book.Id" class="action-btn">Delete</a>
+                            }
+                            else
+                            {
+                                @if (book.IsAvailable)
+                                {
+                                    <form asp-action="Issue" method="post" asp-route-id="@book.Id" style="display:inline;">
+                                        <button type="submit" class="issue-btn">Issue Book</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Issued</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-3">
+            <a asp-action="MyBooks" class="btn btn-outline-light">View My Books</a>
+        </div>
+    </div>
+</div>

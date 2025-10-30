@@ -1,0 +1,150 @@
+@model IEnumerable<LibraryManagement.Models.Book>
+
+@{
+    ViewData["Title"] = "Manage Books";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="card border-0 shadow-lg">
+        <div class="card-header text-center fs-4 fw-bold text-white">
+            📚 Manage Books
+        </div>
+        <div class="card-body">
+            <div class="text-end mb-3">
+                <a asp-action="AddBook" class="btn btn-primary fw-semibold px-4 shadow">
+                    + Add New Book
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Book ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var book in Model)
+                            {
+                                <tr class="text-center">
+                                    <td>@book.Id</td>
+                                    <td>@book.Title</td>
+                                    <td>@book.Author</td>
+                                    <td>@book.Category</td>
+                                    <td>
+                                        @if (book.IsAvailable)
+                                        {
+                                            <span class="badge bg-success">Available</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Issued</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditBook" asp-route-id="@book.Id"
+                                           class="btn btn-sm btn-outline-warning text-white fw-semibold me-2 shadow-sm">
+                                            ✏️ Edit
+                                        </a>
+                                        <a asp-action="DeleteBook" asp-route-id="@book.Id"
+                                           class="btn btn-sm btn-outline-danger text-white fw-semibold shadow-sm"
+                                           onclick="return confirm('Are you sure you want to delete this book?');">
+                                            🗑️ Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-3">No books available</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-controller="Admin" asp-action="Dashboard"
+                   class="btn btn-outline-info fw-semibold rounded-pill px-4 shadow">
+                    ⬅ Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card {
+        background-color: rgba(25, 25, 25, 0.9);
+        border-radius: 16px;
+        border: 1px solid #333;
+    }
+
+    .card-header {
+        background-color: #00b4db;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        border-bottom: none;
+    }
+
+    .table {
+        color: #fff;
+    }
+
+    .table th {
+        background-color: #1c1c1c;
+        color: #00b4db;
+        font-weight: 600;
+    }
+
+    .table td {
+        background-color: #242424;
+        vertical-align: middle;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 180, 219, 0.1);
+        transition: 0.3s ease-in-out;
+    }
+
+    .btn-primary {
+        background-color: #00b4db;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0093b8;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: #000 !important;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff !important;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #00b4db;
+        color: #fff !important;
+    }
+</style>

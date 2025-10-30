@@ -1,0 +1,131 @@
+@model IEnumerable<LibraryManagement.Models.Book>
+
+@{
+    ViewData["Title"] = "Manage Books";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center">
+            <h2 class="mb-0">📚 Manage Books</h2>
+        </div>
+        <div class="card-body">
+            <div class="text-end mb-3">
+                <a asp-controller="Books" asp-action="Create" class="btn btn-primary fw-semibold">
+                    + Add New Book
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-hover align-middle rounded-3 overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Available</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var book in Model)
+                            {
+                                <tr>
+                                    <td>@book.Id</td>
+                                    <td>@book.Title</td>
+                                    <td>@book.Author</td>
+                                    <td>@book.Category</td>
+                                    <td>@(book.IsAvailable ? "✅ Yes" : "❌ No")</td>
+                                    <td class="text-center">
+                                        <form asp-controller="Books" asp-action="Edit" method="get" style="display:inline;">
+                                            <input type="hidden" name="id" value="@book.Id" />
+                                            <button type="submit" class="btn btn-warning btn-sm fw-semibold px-3">
+                                                Edit
+                                            </button>
+                                        </form>
+
+                                        <form asp-controller="Books" asp-action="Delete" method="post" style="display:inline;"
+                                              onsubmit="return confirm('Are you sure you want to delete this book?');">
+                                            <input type="hidden" name="id" value="@book.Id" />
+                                            <button type="submit" class="btn btn-danger btn-sm fw-semibold px-3">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">No books available</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    h2 {
+        color: #fff;
+        font-weight: 600;
+        text-shadow: 0 0 8px #00b4db;
+    }
+
+    .card {
+        background-color: rgba(20, 20, 20, 0.95);
+        border: 1px solid #333;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-header {
+        background: linear-gradient(90deg, #00b4db, #0083b0);
+        color: white;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .table thead th {
+        color: #00b4db;
+        background-color: #1c1c1c;
+    }
+
+    .table td {
+        background-color: #242424;
+        color: #fff;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border: none;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background-color: #b02a37;
+    }
+
+    .btn-primary {
+        background-color: #00b4db;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0093b8;
+    }
+</style>
