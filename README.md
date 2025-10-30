@@ -118,10 +118,10 @@ LibraryManagement/
 
 ## Admin login
 
-username-admin
+username-admin                                                  
 password-admin123
 
 ## user login
 
-username-DemoUser
-password-123# LibraryManagement
+username-DemoUser                       
+password-123
