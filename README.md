@@ -111,16 +111,17 @@ LibraryManagement/
 ## 👨‍💻 Created By
 
 **Lucky Talaviya**  
-📧23amtics435@gmail.com  
-💻 [GitHub Profile](https://github.com/Talaviyalucky)
-
+📧Email:-23amtics435@gmail.com  
+💻 GitHub Profile:- https://github.com/Talaviyalucky 
 
 ---
 
 ## Admin login
+
 username-admin
 password-admin123
 
 ## user login
+
 username-DemoUser
 password-123# LibraryManagement

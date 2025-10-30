@@ -438,3 +438,4 @@
 /Users/talaviyaluckyhareshbhai/Desktop/LibraryManagement111111/obj/Debug/net9.0/LibraryManagement.pdb
 /Users/talaviyaluckyhareshbhai/Desktop/LibraryManagement111111/obj/Debug/net9.0/LibraryManagement.genruntimeconfig.cache
 /Users/talaviyaluckyhareshbhai/Desktop/LibraryManagement111111/obj/Debug/net9.0/ref/LibraryManagement.dll
+/Users/talaviyaluckyhareshbhai/Desktop/LibraryManagement/obj/Debug/net9.0/LibraryManagement.sourcelink.json
